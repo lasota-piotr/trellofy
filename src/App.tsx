@@ -2,11 +2,13 @@ import React from 'react'
 import { ThemeProvider } from 'styled-components/macro'
 import Layout from './components/Layout'
 import theme from './styles/theme'
+import GlobalStyles from './styles/GlobalStyles'
 
 const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <Layout>
+        <GlobalStyles />
         <header className="App-header">
           <p>
             Edit <code>src/App.tsx</code> and save to reload.

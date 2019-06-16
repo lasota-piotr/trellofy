@@ -1,7 +1,26 @@
 {
-  "extends": ["kentcdodds", "kentcdodds/react"],
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "kentcdodds",
+    "kentcdodds/react"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018, // Allows for the parsing of modern ECMAScript features
+    "sourceType": "module" // Allows for the use of imports
+  },
   "rules": {
     "import/no-unresolved": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".jsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".jsx"] }],
+    "@typescript-eslint/indent": ["error", 2],
+    "@typescript-eslint/member-delimiter-style": {
+      "delimiter": "none",
+      "requireLast": true
+    }
+  },
+  "settings": {
+    "react": {
+      "version": "detect" // Tells eslint-plugin-react to automatically detect the version of React to use
+    }
   }
 }

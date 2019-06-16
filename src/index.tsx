@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import 'styled-components/macro'
+// eslint-disable-next-line import/order
 import * as types from 'styled-components/cssprop'
 
 import * as serviceWorker from './serviceWorker';
