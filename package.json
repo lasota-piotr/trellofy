@@ -38,6 +38,8 @@
   "devDependencies": {
     "@commitlint/cli": "^8.0.0",
     "@commitlint/config-conventional": "^8.0.0",
+    "eslint": "^5.16.0",
+    "eslint-config-kentcdodds": "^14.3.3",
     "husky": "^2.4.1"
   },
   "husky": {
