@@ -1,12 +1,10 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import styled from "styled-components/macro";
 
 const App: React.FC = () => {
   return (
-    <div className="App">
+    <AppWrapper>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
@@ -16,11 +14,15 @@ const App: React.FC = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn React !!!
         </a>
       </header>
-    </div>
+    </AppWrapper>
   );
-}
+};
+
+const AppWrapper = styled.div`
+  color: red;
+`;
 
 export default App;
