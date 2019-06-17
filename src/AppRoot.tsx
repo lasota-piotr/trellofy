@@ -8,7 +8,7 @@ const AppRoot = () => {
   return (
     <Router>
       <Route component={Boards} path="/" />
-      <Route component={Board} path="board" />
+      <Route component={Board} path="boards/:boardId" />
     </Router>
   )
 }
