@@ -7,6 +7,7 @@ import { Card as CardRebass, CardProps } from 'rebass'
 import { useAppState } from '../context/AppContext'
 import Card from './Card'
 import AddCard from './AddCard'
+import ListTitle from './ListTitle'
 
 interface ListProps extends CardProps {
   listId: string
@@ -18,10 +19,8 @@ const List: React.FC<ListProps> = ({ listId, ...rest }) => {
   return (
     //@ts-ignore
     <ListWrapper {...rest}>
-      List
-      <div>
-        {listId} {list.title}{' '}
-      </div>
+      <ListTitle listId={listId} />
+
       <div>
         {list.cards.map(cardId => (
           <Card cardId={cardId} key={cardId} />
