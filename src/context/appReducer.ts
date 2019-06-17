@@ -25,7 +25,37 @@ interface ActionAddCard {
   }
 }
 
-export type AppAction = ActionAddList | ActionUpdateListTitle | ActionAddCard
+interface ActionUpdateCardTitle {
+  type: 'updateCardTitle'
+  payload: {
+    title: string
+    cardId: string
+  }
+}
+
+interface ActionUpdateCardDescription {
+  type: 'updateCardDescription'
+  payload: {
+    description: string
+    cardId: string
+  }
+}
+
+interface ActionChangeShowModal {
+  type: 'changeShowModal'
+  payload: {
+    show: boolean
+    cardId: string
+  }
+}
+
+export type AppAction =
+  | ActionAddList
+  | ActionUpdateListTitle
+  | ActionAddCard
+  | ActionUpdateCardTitle
+  | ActionUpdateCardDescription
+  | ActionChangeShowModal
 
 const appReducer = (state: AppState, action: AppAction): AppState => {
   switch (action.type) {
@@ -102,6 +132,54 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
               ...state.lists.byId[listId],
               cards: [...state.lists.byId[listId].cards, cardId],
             },
+          },
+        },
+      }
+    }
+
+    case 'updateCardTitle': {
+      const { cardId, title } = action.payload
+      return {
+        ...state,
+        cards: {
+          ...state.cards,
+          byId: {
+            ...state.cards.byId,
+            [cardId]: {
+              ...state.cards.byId[cardId],
+              title,
+            },
+          },
+        },
+      }
+    }
+
+    case 'updateCardDescription': {
+      const { cardId, description } = action.payload
+      return {
+        ...state,
+        cards: {
+          ...state.cards,
+          byId: {
+            ...state.cards.byId,
+            [cardId]: {
+              ...state.cards.byId[cardId],
+              description,
+            },
+          },
+        },
+      }
+    }
+
+    case 'changeShowModal': {
+      const { cardId, show } = action.payload
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          modalCard: {
+            show,
+            cardId,
           },
         },
       }

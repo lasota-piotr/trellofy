@@ -29,6 +29,12 @@ export interface AppState {
     byId: { [cardId: string]: Card }
     allIds: string[]
   }
+  ui: {
+    modalCard: {
+      show: boolean
+      cardId: string
+    }
+  }
 }
 
 export const appContextDefaultValue = {
@@ -43,6 +49,12 @@ export const appContextDefaultValue = {
   cards: {
     byId: {},
     allIds: [],
+  },
+  ui: {
+    modalCard: {
+      show: false,
+      cardId: '',
+    },
   },
 }
 
@@ -101,5 +113,12 @@ export const appContextValue = {
       },
     },
     allIds: ['card01', 'card02', 'card03', 'card04'],
+
+  },
+  ui: {
+    modalCard: {
+      show: false,
+      cardId: '',
+    },
   },
 }

@@ -1,22 +1,22 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 import { Text } from 'rebass'
-import {useAppState} from '../context/AppContext'
+import { useAppState } from '../context/AppContext'
 import CardWrapper from './CardWrapper'
 
 interface CardProps {
   cardId: string
+  onClick: () => void
 }
 
-const Card: React.FC<CardProps> = ({ cardId }) => {
+const Card: React.FC<CardProps> = ({ cardId, ...rest }) => {
   const appContextValue = useAppState()
   const card = appContextValue.cards.byId[cardId]
   return (
-    <CardWrapper>
+    <CardWrapper {...rest}>
       <CardTitle>{card.title}</CardTitle>
-      Card{' '}
       <div>
-        {cardId} {card.description}
+        {card.description}
       </div>
     </CardWrapper>
   )

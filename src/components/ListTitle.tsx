@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
-
+import React from 'react'
 import { useAppDispatch, useAppState } from '../context/AppContext'
-import ListenForKeys from './ListenForKeys'
+import EditableText from './reusable/EditableText'
 
 interface ListTitleProps {
   listId: string
@@ -12,49 +11,24 @@ const ListTitle: React.FC<ListTitleProps> = ({ listId }) => {
   const appContextValue = useAppState()
   const list = appContextValue.lists.byId[listId]
   const { title } = list
-  const [newTitle, setNewTitle] = useState(title)
-  const [inputFocused, setInputFocused] = useState(false)
-
-  const onBlurHandle = () => {
-    if (newTitle && newTitle !== title) {
-      appDispatch({
-        type: 'updateListTitle',
-        payload: {
-          title: newTitle,
-          listId,
-        },
-      })
-    } else {
-      // reset title to previous
-      setNewTitle(title)
-    }
-    setInputFocused(false)
-  }
-
-  const inputRef = React.useRef(null)
 
   return (
     <div>
-      <h3>{list.title}</h3>
-      <input
-        type="text"
-        value={newTitle}
-        onChange={e => setNewTitle(e.target.value)}
-        onBlur={onBlurHandle}
-        onFocus={() => setInputFocused(true)}
-        ref={inputRef}
+      <EditableText
+        text={title}
+        onAccept={newText =>
+          appDispatch({
+            type: 'updateListTitle',
+            payload: {
+              title: newText,
+              listId,
+            },
+          })
+        }
+        renderText={({ text, getTextProps }) => (
+          <h3 {...getTextProps()}>{text}</h3>
+        )}
       />
-      {inputFocused && (
-        <ListenForKeys
-          callback={() => {
-            if (inputRef === null || !inputRef.current) {
-              return
-            }
-            // @ts-ignore
-            inputRef.current.blur()
-          }}
-        />
-      )}
     </div>
   )
 }

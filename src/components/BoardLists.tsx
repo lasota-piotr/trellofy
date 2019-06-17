@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import List from './List'
 import { Board } from '../context/appContextValue'
+import List from './List'
 import AddList from './AddList'
 
 interface BoardListsProps {
@@ -9,13 +9,22 @@ interface BoardListsProps {
   boardId: string
 }
 
-const BoardLists: React.FC<BoardListsProps> = ({ lists, boardId }) => {
+const BoardLists: React.FC<BoardListsProps> = ({
+  lists,
+  boardId,
+}) => {
   return (
     <BoardListsWrapper>
       {lists.map(listId => {
-        return <List listId={listId} key={listId} m={2} />
+        return (
+          <List
+            listId={listId}
+            key={listId}
+            m={2}
+          />
+        )
       })}
-      <AddList boardId={boardId}/>
+      <AddList boardId={boardId} />
     </BoardListsWrapper>
   )
 }

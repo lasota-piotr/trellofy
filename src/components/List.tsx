@@ -4,7 +4,7 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 import { Card as CardRebass, CardProps } from 'rebass'
-import { useAppState } from '../context/AppContext'
+import { useAppDispatch, useAppState } from '../context/AppContext'
 import Card from './Card'
 import AddCard from './AddCard'
 import ListTitle from './ListTitle'
@@ -15,6 +15,7 @@ interface ListProps extends CardProps {
 
 const List: React.FC<ListProps> = ({ listId, ...rest }) => {
   const appContextValue = useAppState()
+  const appDispatch = useAppDispatch()
   const list = appContextValue.lists.byId[listId]
   return (
     //@ts-ignore
@@ -23,7 +24,16 @@ const List: React.FC<ListProps> = ({ listId, ...rest }) => {
 
       <div>
         {list.cards.map(cardId => (
-          <Card cardId={cardId} key={cardId} />
+          <Card
+            cardId={cardId}
+            key={cardId}
+            onClick={() => {
+              appDispatch({
+                type: 'changeShowModal',
+                payload: { show: true, cardId },
+              })
+            }}
+          />
         ))}
       </div>
       <AddCard listId={listId} />
