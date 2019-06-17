@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components/macro'
-import { Text } from 'rebass'
+import { Card as CardRebass, Text } from 'rebass'
+import { ellipsis } from 'polished'
 import { useAppState } from '../context/AppContext'
-import CardWrapper from './CardWrapper'
 
 interface CardProps {
   cardId: string
@@ -15,9 +15,7 @@ const Card: React.FC<CardProps> = ({ cardId, ...rest }) => {
   return (
     <CardWrapper {...rest}>
       <CardTitle>{card.title}</CardTitle>
-      <div>
-        {card.description}
-      </div>
+      <CardDescription>{card.description}</CardDescription>
     </CardWrapper>
   )
 }
@@ -25,6 +23,23 @@ const Card: React.FC<CardProps> = ({ cardId, ...rest }) => {
 const CardTitle = styled(Text).attrs({
   fontSize: 2,
   fontWeight: 'bold',
-})``
+})`
+  ${ellipsis()}
+`
 
+const CardDescription = styled(Text)`
+  ${ellipsis()}
+`
+
+const CardWrapper = styled(CardRebass).attrs({
+  fontSize: 2,
+  p: 1,
+  my: 2,
+  bg: 'white',
+  borderRadius: 8,
+  boxShadow: 'small',
+})`
+  display: flex;
+  flex-direction: column;
+`
 export default Card

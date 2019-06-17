@@ -45,6 +45,8 @@ const ListWrapper = styled(CardRebass).attrs({
   bg: 'lightgray',
   boxShadow: 'small',
   p: 2,
-})``
+})`
+  width: 15em;
+`
 
 export default List
