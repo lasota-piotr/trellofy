@@ -54,8 +54,13 @@ export const appContextValue = {
         title: 'Board 01',
         lists: ['list01', 'list02'],
       },
+      board02: {
+        id: 'board02',
+        title: 'Board 02',
+        lists: [],
+      },
     },
-    allIds: ['board01'],
+    allIds: ['board01', 'board02'],
   },
   lists: {
     byId: {
@@ -98,5 +103,3 @@ export const appContextValue = {
     allIds: ['card01', 'card02', 'card03', 'card04'],
   },
 }
-
-

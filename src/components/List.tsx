@@ -4,8 +4,9 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 import { Card as CardRebass, CardProps } from 'rebass'
-import {useAppState} from '../context/AppContext'
+import { useAppState } from '../context/AppContext'
 import Card from './Card'
+import AddCard from './AddCard'
 
 interface ListProps extends CardProps {
   listId: string
@@ -26,6 +27,7 @@ const List: React.FC<ListProps> = ({ listId, ...rest }) => {
           <Card cardId={cardId} key={cardId} />
         ))}
       </div>
+      <AddCard listId={listId} />
     </ListWrapper>
   )
 }
