@@ -10,11 +10,13 @@
     "@types/react": "16.8.20",
     "@types/react-dom": "16.8.4",
     "@types/rebass": "^3.0.4",
+    "@types/shortid": "^0.0.29",
     "@types/styled-components": "^4.1.16",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
     "rebass": "^3.1.1",
+    "shortid": "^2.2.14",
     "styled-components": "^4.3.1",
     "styled-normalize": "^8.0.6",
     "typescript": "3.5.2"

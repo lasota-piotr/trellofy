@@ -3,16 +3,16 @@
  * */
 import React from 'react'
 import { RouteComponentProps } from '@reach/router'
-import styled from 'styled-components'
-import useAppContext from '../context/useAppContext'
-import List from './List'
+import styled from 'styled-components/macro'
+import { useAppState } from '../context/AppContext'
+import BoardLists from './BoardLists'
 
 interface BoardProps {
   boardId?: string
 }
 
 const Board: React.FC<BoardProps & RouteComponentProps> = ({ boardId }) => {
-  const appContextValue = useAppContext()
+  const appContextValue = useAppState()
   if (!boardId) {
     return null
   }
@@ -24,11 +24,7 @@ const Board: React.FC<BoardProps & RouteComponentProps> = ({ boardId }) => {
         {board.id}
       </div>
       <div>
-        <div>
-          {board.lists.map(listId => {
-            return <List listId={listId} key={listId} />
-          })}
-        </div>
+        <BoardLists lists={board.lists} boardId={boardId} />
       </div>
     </BoardWrapper>
   )

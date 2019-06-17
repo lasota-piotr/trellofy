@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from '@reach/router'
-import useAppContext from '../context/useAppContext'
+import {useAppState} from '../context/AppContext'
 
 const Boards = () => {
-  const appContextValue = useAppContext()
+  const appContextValue = useAppState()
   const boardsIds = appContextValue.boards.allIds
 
   return (

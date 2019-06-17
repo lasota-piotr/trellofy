@@ -1,22 +1,22 @@
-interface Board {
+export interface Board {
   id: string
   title: string
   lists: string[]
 }
 
-interface List {
+export interface List {
   id: string
   title: string
   cards: string[]
 }
 
-interface Card {
+export interface Card {
   id: string
   title: string
   description: string
 }
 
-export interface AppContextValue {
+export interface AppState {
   boards: {
     byId: { [boardId: string]: Board }
     allIds: string[]

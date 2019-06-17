@@ -1,6 +1,6 @@
 import React from 'react'
 import { Normalize } from 'styled-normalize'
-import { createGlobalStyle, css } from 'styled-components'
+import { createGlobalStyle, css } from 'styled-components/macro'
 
 const GlobalStyles = () => {
   return (
@@ -25,7 +25,7 @@ const html = css`
 
 const body = css`
   body {
-    font-family: ${p => p.theme.sans};
+    font-family: ${p => p.theme.fonts.sans};
     font-size: 16px;
   }
 `
