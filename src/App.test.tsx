@@ -1,6 +1,8 @@
 import React from 'react'
+import renderWithRouter from '../__tests__/testUtils/renderWithRouter'
 import App from './App'
-import renderWithRouter from './testUtils/renderWithRouter'
+
+jest.mock('./context/appContextValue')
 
 describe('App', () => {
   test('full app rendering/navigating', async () => {
