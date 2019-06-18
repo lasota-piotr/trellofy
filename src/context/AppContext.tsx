@@ -3,7 +3,6 @@ import React from 'react'
 import {
   appContextDefaultValue,
   AppState,
-  appContextValue,
 } from './appContextValue'
 import appReducer, { AppAction } from './appReducer'
 
@@ -19,7 +18,7 @@ export const AppDispatchContext = React.createContext<AppDispatch | undefined>(
 
 
 export const AppContextProvider: React.FC = ({ children }) => {
-  const [state, setAppState] = React.useReducer(appReducer, appContextValue)
+  const [state, setAppState] = React.useReducer(appReducer, appContextDefaultValue)
   return (
     <AppStateContext.Provider value={state}>
       <AppDispatchContext.Provider value={setAppState}>

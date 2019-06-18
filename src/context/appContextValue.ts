@@ -1,3 +1,5 @@
+console.log('from real file')
+
 export interface Board {
   id: string
   title: string
@@ -18,15 +20,15 @@ export interface Card {
 
 export interface AppState {
   boards: {
-    byId: { [boardId: string]: Board }
+    byId: { [boardId: string]: Board | undefined }
     allIds: string[]
   }
   lists: {
-    byId: { [listId: string]: List }
+    byId: { [listId: string]: List | undefined }
     allIds: string[]
   }
   cards: {
-    byId: { [cardId: string]: Card }
+    byId: { [cardId: string]: Card | undefined }
     allIds: string[]
   }
   ui: {
@@ -38,27 +40,6 @@ export interface AppState {
 }
 
 export const appContextDefaultValue = {
-  boards: {
-    byId: {},
-    allIds: [],
-  },
-  lists: {
-    byId: {},
-    allIds: [],
-  },
-  cards: {
-    byId: {},
-    allIds: [],
-  },
-  ui: {
-    modalCard: {
-      show: false,
-      cardId: '',
-    },
-  },
-}
-
-export const appContextValue = {
   boards: {
     byId: {
       board01: {

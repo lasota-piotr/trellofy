@@ -14,7 +14,11 @@ const Boards = () => {
       </Text>
       <div>
         {boardsIds.map(boardId => {
-          const boardTitle = appContextValue.boards.byId[boardId].title
+          const board = appContextValue.boards.byId[boardId]
+          if (!board) {
+            return null
+          }
+          const boardTitle = board.title
           return (
             <Link to={`/boards/${boardId}`} key={boardId}>
               <Text m={2}>{boardTitle}</Text>

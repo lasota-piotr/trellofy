@@ -57,11 +57,16 @@ export type AppAction =
   | ActionUpdateCardDescription
   | ActionChangeShowModal
 
+// eslint-disable-next-line max-lines-per-function
 const appReducer = (state: AppState, action: AppAction): AppState => {
   switch (action.type) {
     case 'addList': {
       const listId = shortid.generate()
       const { boardId, title } = action.payload
+      const board = state.boards.byId[boardId]
+      if (!board) {
+        throw new Error(`Cannot find board ${boardId}`)
+      }
       return {
         ...state,
         lists: {
@@ -81,8 +86,8 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
           byId: {
             ...state.boards.byId,
             [boardId]: {
-              ...state.boards.byId[boardId],
-              lists: [...state.boards.byId[boardId].lists, listId],
+              ...board,
+              lists: [...board.lists, listId],
             },
           },
         },
@@ -91,6 +96,10 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
 
     case 'updateListTitle': {
       const { listId, title } = action.payload
+      const list = state.lists.byId[listId]
+      if (!list) {
+        throw new Error(`Cannot find list ${listId}`)
+      }
       return {
         ...state,
         lists: {
@@ -98,7 +107,7 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
           byId: {
             ...state.lists.byId,
             [listId]: {
-              ...state.lists.byId[listId],
+              ...list,
               title,
             },
           },
@@ -109,6 +118,11 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
     case 'addCard': {
       const cardId = shortid.generate()
       const { listId, title } = action.payload
+
+      const list = state.lists.byId[listId]
+      if (!list) {
+        throw new Error(`Cannot find list ${listId}`)
+      }
 
       return {
         ...state,
@@ -129,8 +143,8 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
           byId: {
             ...state.lists.byId,
             [listId]: {
-              ...state.lists.byId[listId],
-              cards: [...state.lists.byId[listId].cards, cardId],
+              ...list,
+              cards: [...list.cards, cardId],
             },
           },
         },
@@ -139,6 +153,10 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
 
     case 'updateCardTitle': {
       const { cardId, title } = action.payload
+      const card = state.cards.byId[cardId]
+      if (!card) {
+        throw new Error(`Cannot find list ${cardId}`)
+      }
       return {
         ...state,
         cards: {
@@ -146,7 +164,7 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
           byId: {
             ...state.cards.byId,
             [cardId]: {
-              ...state.cards.byId[cardId],
+              ...card,
               title,
             },
           },
@@ -156,6 +174,11 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
 
     case 'updateCardDescription': {
       const { cardId, description } = action.payload
+      const card = state.cards.byId[cardId]
+      if (!card) {
+        throw new Error(`Cannot find list ${cardId}`)
+      }
+
       return {
         ...state,
         cards: {
@@ -163,7 +186,7 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
           byId: {
             ...state.cards.byId,
             [cardId]: {
-              ...state.cards.byId[cardId],
+              ...card,
               description,
             },
           },

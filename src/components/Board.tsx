@@ -19,6 +19,9 @@ const Board: React.FC<BoardProps & RouteComponentProps> = ({ boardId }) => {
     return null
   }
   const board = appContextValue.boards.byId[boardId]
+  if (!board) {
+    return <div>Ops can`t find this board</div>
+  }
   return (
     <BoardContainer p={3} pt={5} data-testid="view-board">
       <BoardTitleContainer p={2}>

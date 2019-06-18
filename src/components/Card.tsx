@@ -12,6 +12,11 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({ cardId, ...rest }) => {
   const appContextValue = useAppState()
   const card = appContextValue.cards.byId[cardId]
+
+  if (!card) {
+    return <div>Ops, can`t find card</div>
+  }
+
   return (
     <CardWrapper {...rest}>
       <CardTitle>{card.title}</CardTitle>

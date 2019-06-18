@@ -18,6 +18,10 @@ const ModalCard: React.FC = () => {
   }
   const card = appContextValue.cards.byId[cardId]
 
+  if (!card) {
+    return <div>Ops, can`t find card</div>
+  }
+
   return (
     <div>
       <Modal

@@ -18,6 +18,11 @@ const List: React.FC<ListProps> = ({ listId, ...rest }) => {
   const appContextValue = useAppState()
   const appDispatch = useAppDispatch()
   const list = appContextValue.lists.byId[listId]
+
+  if (!list) {
+    return <div>Ops, can`t find list</div>
+  }
+
   return (
     //@ts-ignore
     <ListContainer as="article" {...rest}>

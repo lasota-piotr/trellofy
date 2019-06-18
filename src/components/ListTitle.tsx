@@ -14,6 +14,11 @@ const ListTitle: React.FC<ListTitleProps> = ({ listId }) => {
   const appDispatch = useAppDispatch()
   const appContextValue = useAppState()
   const list = appContextValue.lists.byId[listId]
+
+  if (!list) {
+    return <div>Ops, can`t find list</div>
+  }
+
   const { title } = list
 
   return (
