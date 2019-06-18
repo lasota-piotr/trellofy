@@ -17,7 +17,7 @@ const Modal: React.FC<ModalCardProps> = ({
   children,
 }) => {
   return (
-    <DialogStyled isOpen={showModal} onDismiss={() => setShowModal(false)}>
+    <DialogStyled isOpen={showModal}>
       <CloseButton onClick={() => setShowModal(false)}>
         <VisuallyHidden>Close</VisuallyHidden>
         <CloseIcon />
@@ -31,9 +31,14 @@ const DialogStyled = styled(Dialog)`
   position: relative;
 
   &[data-reach-dialog-content] {
-    width: 95%;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 3rem 4rem;
     ${media.tablet`
-      width: 50vw;
+      margin: 5rem auto;
+      width: 70vw;
+      height: 60vh;
     `}
   }
 `

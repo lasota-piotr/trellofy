@@ -1,31 +1,41 @@
 import React, { useState } from 'react'
 import { hideVisually } from 'polished'
 import VisuallyHidden from '@reach/visually-hidden'
-import styled from 'styled-components'
 import ListenForKeys from './ListenForKeys'
+
+export enum Keys {
+  Esc = 27,
+  Enter = 13,
+}
 
 interface EditableTextProps {
   text: string
   onAccept: (newText: string) => void
+  acceptKeys?: any[]
   renderText: (data: {
     text: string
     getTextProps: () => {
       onClick: () => void
     }
   }) => JSX.Element
+  renderInput?: (data: any) => JSX.Element
+  optional?: boolean
 }
 
 const EditableText: React.FC<EditableTextProps> = ({
   text,
   onAccept,
+  acceptKeys = [Keys.Enter, Keys.Esc],
+  optional = false,
   renderText,
+  renderInput,
 }) => {
   const [newText, setNewText] = useState(text)
   const [inputFocused, setInputFocused] = useState(false)
 
   const onBlurHandle = (e: React.FocusEvent<HTMLInputElement>) => {
     e.preventDefault()
-    if (newText && newText !== text) {
+    if (newText !== text && (optional || newText)) {
       onAccept(newText)
     } else {
       // reset text to previous
@@ -48,6 +58,17 @@ const EditableText: React.FC<EditableTextProps> = ({
     onClick: focusInput,
   })
   const textElement = renderText({ text, getTextProps })
+
+  const getInputProps = () => ({
+    value: newText,
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+      setNewText(e.target.value),
+    onBlur: onBlurHandle,
+    onFocus: () => setInputFocused(true),
+    ref: inputRef,
+    style: inputFocused ? undefined : hideVisually(),
+  })
+
   return (
     <>
       {inputFocused ? (
@@ -56,15 +77,7 @@ const EditableText: React.FC<EditableTextProps> = ({
         textElement
       )}
 
-      <Input
-        type="text"
-        value={newText}
-        onChange={e => setNewText(e.target.value)}
-        onBlur={onBlurHandle}
-        onFocus={() => setInputFocused(true)}
-        ref={inputRef}
-        hide={!inputFocused}
-      />
+      {typeof renderInput === 'function' && renderInput({ getInputProps })}
       {inputFocused && (
         <ListenForKeys
           callback={() => {
@@ -74,18 +87,13 @@ const EditableText: React.FC<EditableTextProps> = ({
             // @ts-ignore
             inputRef.current.blur()
           }}
+          options={{
+            detectKeys: acceptKeys,
+          }}
         />
       )}
     </>
   )
 }
-
-interface InputProps {
-  hide: boolean
-}
-
-const Input = styled.input<InputProps>`
-  ${p => p.hide && hideVisually}
-`
 
 export default EditableText

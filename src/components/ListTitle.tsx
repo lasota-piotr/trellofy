@@ -25,8 +25,14 @@ const ListTitle: React.FC<ListTitleProps> = ({ listId }) => {
             },
           })
         }
+        renderInput={({ getInputProps }) => (
+          <input
+            type="text"
+            {...getInputProps()}
+          />
+        )}
         renderText={({ text, getTextProps }) => (
-          <h3 {...getTextProps()}>{text}</h3>
+          <div {...getTextProps()}>{text}</div>
         )}
       />
     </div>
