@@ -24,7 +24,7 @@ const BoardLists: React.FC<BoardListsProps> = ({
           />
         )
       })}
-      <AddList boardId={boardId} />
+      <AddList boardId={boardId} m={2} />
     </BoardListsWrapper>
   )
 }

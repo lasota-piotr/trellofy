@@ -2,12 +2,13 @@
  * List contains cards
  * */
 import React from 'react'
-import styled from 'styled-components/macro'
-import { Card as CardRebass, CardProps } from 'rebass'
 import { useAppDispatch, useAppState } from '../context/AppContext'
 import Card from './Card'
 import AddCard from './AddCard'
 import ListTitle from './ListTitle'
+import ListContainer from './reusable/ListContainer'
+import { CardProps } from 'rebass'
+
 
 interface ListProps extends CardProps {
   listId: string
@@ -19,7 +20,7 @@ const List: React.FC<ListProps> = ({ listId, ...rest }) => {
   const list = appContextValue.lists.byId[listId]
   return (
     //@ts-ignore
-    <ListWrapper {...rest}>
+    <ListContainer {...rest}>
       <ListTitle listId={listId} />
 
       <div>
@@ -37,16 +38,8 @@ const List: React.FC<ListProps> = ({ listId, ...rest }) => {
         ))}
       </div>
       <AddCard listId={listId} />
-    </ListWrapper>
+    </ListContainer>
   )
 }
-
-const ListWrapper = styled(CardRebass).attrs({
-  bg: 'lightgray',
-  boxShadow: 'small',
-  p: 2,
-})`
-  width: 15em;
-`
 
 export default List

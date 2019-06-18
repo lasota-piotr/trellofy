@@ -1,19 +1,23 @@
 import React from 'react'
+import { Box, Button, CardProps, Text } from 'rebass'
+import { hideVisually } from 'polished'
+import styled from 'styled-components'
 import { useAppDispatch } from '../context/AppContext'
 import FormAdd from './reusable/FormAdd'
-import { hideVisually } from 'polished'
+import ListContainer from './reusable/ListContainer'
 
 const ADD_LIST_TITLE_INPUT_MAX_LENGTH = 30
 
-interface AddListProps {
+interface AddListProps extends CardProps {
   boardId: string
 }
 
-const AddList: React.FC<AddListProps> = ({ boardId }) => {
+const AddList: React.FC<AddListProps> = ({ boardId, ...props }) => {
   const appDispatch = useAppDispatch()
 
   return (
-    <div>
+    // @ts-ignore
+    <AddListContainer padding={0} {...props}>
       <FormAdd
         onAccept={newText => {
           appDispatch({
@@ -25,7 +29,11 @@ const AddList: React.FC<AddListProps> = ({ boardId }) => {
           })
         }}
         renderText={({ getTextProps }) => {
-          return <span {...getTextProps()}>+ Add another list</span>
+          return (
+            <AddListText as="span" p="0.75rem" {...getTextProps()}>
+              + Add another list
+            </AddListText>
+          )
         }}
         renderInput={({
           accept,
@@ -34,7 +42,9 @@ const AddList: React.FC<AddListProps> = ({ boardId }) => {
           inputContainerRef,
         }) => {
           return (
-            <form
+            <AddListForm
+              as="form"
+              p={1}
               onSubmit={event => {
                 event.preventDefault()
                 accept()
@@ -42,20 +52,45 @@ const AddList: React.FC<AddListProps> = ({ boardId }) => {
               style={inputVisible ? undefined : hideVisually()}
               ref={inputContainerRef}
             >
-              <input
+              <AddListInput
+                p={2}
+                mb={2}
+                as="input"
+                width="100%"
                 {...getInputProps()}
                 type="text"
                 maxLength={ADD_LIST_TITLE_INPUT_MAX_LENGTH}
                 placeholder="Enter list title..."
                 required
               />
-              <input value="Add list" type="submit" />
-            </form>
+              <AddListButton as="input" fontSize={1} value="Add list" type="submit" />
+            </AddListForm>
           )
         }}
       />
-    </div>
+    </AddListContainer>
   )
 }
+
+const AddListContainer = styled(ListContainer)`
+  align-self: start;
+`
+
+const AddListText = styled(Text)`
+  display: block;
+  :hover {
+    cursor: pointer;
+  }
+`
+
+const AddListForm = styled(Box)``
+
+const AddListInput = styled(Text)``
+
+const AddListButton = styled(Button)`
+  :hover {
+    cursor: pointer;
+  }
+`
 
 export default AddList
