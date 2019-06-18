@@ -1,4 +1,6 @@
-export const appContextDefaultValue = {
+import { AppState } from '../appContextValue'
+
+export const appContextDefaultValue: AppState = {
   boards: {
     byId: {
       board01: {
