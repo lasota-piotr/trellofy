@@ -1,5 +1,7 @@
 import React from 'react'
 import { useAppDispatch } from '../context/AppContext'
+import FormAdd from './reusable/FormAdd'
+import { hideVisually } from 'polished'
 
 const ADD_LIST_TITLE_INPUT_MAX_LENGTH = 30
 
@@ -8,32 +10,51 @@ interface AddListProps {
 }
 
 const AddList: React.FC<AddListProps> = ({ boardId }) => {
-  const [listTitle, setListTitle] = React.useState('')
   const appDispatch = useAppDispatch()
-  const onSubmitHandle = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    appDispatch({
-      type: 'addList',
-      payload: {
-        title: listTitle,
-        boardId,
-      },
-    })
-    setListTitle('')
-  }
 
   return (
-    <form onSubmit={onSubmitHandle}>
-      <span>+ Add another list</span>
-      <input
-        type="text"
-        maxLength={ADD_LIST_TITLE_INPUT_MAX_LENGTH}
-        value={listTitle}
-        onChange={e => setListTitle(e.target.value)}
-        required
+    <div>
+      <FormAdd
+        onAccept={newText => {
+          appDispatch({
+            type: 'addList',
+            payload: {
+              title: newText,
+              boardId,
+            },
+          })
+        }}
+        renderText={({ getTextProps }) => {
+          return <span {...getTextProps()}>+ Add another list</span>
+        }}
+        renderInput={({
+          accept,
+          getInputProps,
+          inputVisible,
+          inputContainerRef,
+        }) => {
+          return (
+            <form
+              onSubmit={event => {
+                event.preventDefault()
+                accept()
+              }}
+              style={inputVisible ? undefined : hideVisually()}
+              ref={inputContainerRef}
+            >
+              <input
+                {...getInputProps()}
+                type="text"
+                maxLength={ADD_LIST_TITLE_INPUT_MAX_LENGTH}
+                placeholder="Enter list title..."
+                required
+              />
+              <input value="Add list" type="submit" />
+            </form>
+          )
+        }}
       />
-      <input value="Add list" type="submit" />
-    </form>
+    </div>
   )
 }
 

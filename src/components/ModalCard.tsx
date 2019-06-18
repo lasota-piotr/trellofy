@@ -4,7 +4,8 @@ import styled from 'styled-components'
 import { Text } from 'rebass'
 import { useAppDispatch, useAppState } from '../context/AppContext'
 import Modal from './reusable/Modal'
-import EditableText, { Keys } from './reusable/EditableText'
+import EditableText from './reusable/EditableText'
+import { Keys } from './reusable/ListenForKeys'
 
 export type SetShowModal = (value: boolean) => void
 

@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import { hideVisually } from 'polished'
 import VisuallyHidden from '@reach/visually-hidden'
-import ListenForKeys from './ListenForKeys'
+import ListenForKeys, { Keys } from './ListenForKeys'
 
-export enum Keys {
-  Esc = 27,
-  Enter = 13,
-}
+
+type GetInputProps = () => any
 
 interface EditableTextProps {
   text: string
@@ -18,9 +16,11 @@ interface EditableTextProps {
       onClick: () => void
     }
   }) => JSX.Element
-  renderInput?: (data: any) => JSX.Element
+  renderInput?: (data: {getInputProps: GetInputProps}) => JSX.Element
   optional?: boolean
 }
+
+
 
 const EditableText: React.FC<EditableTextProps> = ({
   text,
