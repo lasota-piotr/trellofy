@@ -1,9 +1,7 @@
 import React from 'react'
-import { Box, Button, CardProps, Text } from 'rebass'
-import { hideVisually } from 'polished'
 import styled from 'styled-components'
+import { CardProps } from 'rebass'
 import { useAppDispatch } from '../context/AppContext'
-import FormAdd from './reusable/FormAdd'
 import ListContainer from './reusable/ListContainer'
 import AddElement from './reusable/AddElement'
 
@@ -12,14 +10,6 @@ const ADD_LIST_TITLE_INPUT_MAX_LENGTH = 30
 interface AddListProps extends CardProps {
   boardId: string
 }
-
-//appDispatch({
-//             type: 'addList',
-//             payload: {
-//               title: newText,
-//               boardId,
-//             },
-//           })
 
 const AddList: React.FC<AddListProps> = ({ boardId, ...props }) => {
   const appDispatch = useAppDispatch()
