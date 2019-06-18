@@ -8,6 +8,8 @@ const ListContainer = styled(CardRebass).attrs({
   p: 2,
 })`
   width: 15em;
+  flex-shrink: 0;
+  align-self: start;
 `
 
 export default ListContainer

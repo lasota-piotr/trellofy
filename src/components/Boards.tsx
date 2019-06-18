@@ -1,25 +1,28 @@
 import React from 'react'
 import { Link } from '@reach/router'
-import {useAppState} from '../context/AppContext'
+import { useAppState } from '../context/AppContext'
+import { Box, Text } from 'rebass'
 
 const Boards = () => {
   const appContextValue = useAppState()
   const boardsIds = appContextValue.boards.allIds
 
   return (
-    <div>
-      Boards
+    <Box px={4}>
+      <Text as="h2" m={2}>
+        Boards
+      </Text>
       <div>
         {boardsIds.map(boardId => {
           const boardTitle = appContextValue.boards.byId[boardId].title
           return (
             <Link to={`/boards/${boardId}`} key={boardId}>
-              {boardTitle}
+              <Text m={2}>{boardTitle}</Text>
             </Link>
           )
         })}
       </div>
-    </div>
+    </Box>
   )
 }
 

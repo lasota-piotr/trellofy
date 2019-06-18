@@ -7,6 +7,7 @@ import styled from 'styled-components/macro'
 import { useAppState } from '../context/AppContext'
 import BoardLists from './BoardLists'
 import ModalCard from './ModalCard'
+import { Box, Text } from 'rebass'
 
 interface BoardProps {
   boardId?: string
@@ -19,21 +20,25 @@ const Board: React.FC<BoardProps & RouteComponentProps> = ({ boardId }) => {
   }
   const board = appContextValue.boards.byId[boardId]
   return (
-    <BoardWrapper>
-      <div>
-        {board.title}
-        {board.id}
-      </div>
-      <div>
-        <BoardLists lists={board.lists} boardId={boardId} />
-      </div>
+    <BoardContainer p={3} pt={5}>
+      <BoardTitleContainer p={2}>
+        <Text as="h2" m={1}>
+          {board.title}
+        </Text>
+      </BoardTitleContainer>
+      <BoardLists lists={board.lists} boardId={boardId} />
       <ModalCard />
-    </BoardWrapper>
+    </BoardContainer>
   )
 }
 
-const BoardWrapper = styled.div`
-  border: 1px solid black;
+const BoardTitleContainer = styled(Box)`
+  position: fixed;
+  top: 3rem;
+`
+
+const BoardContainer = styled(Box)`
+  position: relative;
 `
 
 export default Board

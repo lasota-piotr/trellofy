@@ -15,7 +15,9 @@ const Card: React.FC<CardProps> = ({ cardId, ...rest }) => {
   return (
     <CardWrapper {...rest}>
       <CardTitle>{card.title}</CardTitle>
-      <CardDescription>{card.description}</CardDescription>
+      {card.description ? (
+        <CardDescription mt={1}>{card.description}</CardDescription>
+      ) : null}
     </CardWrapper>
   )
 }
@@ -33,7 +35,7 @@ const CardDescription = styled(Text)`
 
 const CardWrapper = styled(CardRebass).attrs({
   fontSize: 2,
-  p: 1,
+  p: 2,
   my: 2,
   bg: 'white',
   borderRadius: 8,
@@ -41,5 +43,8 @@ const CardWrapper = styled(CardRebass).attrs({
 })`
   display: flex;
   flex-direction: column;
+  :hover {
+    cursor: pointer;
+  }
 `
 export default Card

@@ -1,0 +1,1 @@
+export const ADD_LIST_TITLE_INPUT_MAX_LENGTH = 30

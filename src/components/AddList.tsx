@@ -1,11 +1,9 @@
 import React from 'react'
-import styled from 'styled-components'
 import { CardProps } from 'rebass'
 import { useAppDispatch } from '../context/AppContext'
 import ListContainer from './reusable/ListContainer'
 import AddElement from './reusable/AddElement'
-
-const ADD_LIST_TITLE_INPUT_MAX_LENGTH = 30
+import { ADD_LIST_TITLE_INPUT_MAX_LENGTH } from './constants/list'
 
 interface AddListProps extends CardProps {
   boardId: string
@@ -16,7 +14,7 @@ const AddList: React.FC<AddListProps> = ({ boardId, ...props }) => {
 
   return (
     // @ts-ignore
-    <AddListContainer padding={0} {...props}>
+    <ListContainer padding={0} {...props}>
       <AddElement
         text="+ Add another list"
         placeholder="Enter list title..."
@@ -31,12 +29,8 @@ const AddList: React.FC<AddListProps> = ({ boardId, ...props }) => {
           })
         }}
       />
-    </AddListContainer>
+    </ListContainer>
   )
 }
-
-const AddListContainer = styled(ListContainer)`
-  align-self: start;
-`
 
 export default AddList

@@ -20,7 +20,7 @@ const List: React.FC<ListProps> = ({ listId, ...rest }) => {
   const list = appContextValue.lists.byId[listId]
   return (
     //@ts-ignore
-    <ListContainer {...rest}>
+    <ListContainer as="article" {...rest}>
       <ListTitle listId={listId} />
 
       <div>
