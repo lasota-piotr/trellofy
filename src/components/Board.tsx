@@ -20,7 +20,7 @@ const Board: React.FC<BoardProps & RouteComponentProps> = ({ boardId }) => {
   }
   const board = appContextValue.boards.byId[boardId]
   return (
-    <BoardContainer p={3} pt={5}>
+    <BoardContainer p={3} pt={5} data-testid="view-board">
       <BoardTitleContainer p={2}>
         <Text as="h2" m={1}>
           {board.title}
