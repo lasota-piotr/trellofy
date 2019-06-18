@@ -1,36 +1,27 @@
 import React from 'react'
 import { useAppDispatch } from '../context/AppContext'
+import AddElement from './reusable/AddElement'
 
 interface AddCardProps {
   listId: string
 }
 
 const AddCard: React.FC<AddCardProps> = ({ listId }) => {
-  const [cardTitle, setCardTitle] = React.useState('')
   const appDispatch = useAppDispatch()
-  const onSubmitHandle = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    appDispatch({
-      type: 'addCard',
-      payload: {
-        title: cardTitle,
-        listId,
-      },
-    })
-    setCardTitle('')
-  }
-
   return (
-    <form onSubmit={onSubmitHandle}>
-      <span>+ Add another card</span>
-      <input
-        type="text"
-        value={cardTitle}
-        onChange={e => setCardTitle(e.target.value)}
-        required
-      />
-      <input value="Add card" type="submit" />
-    </form>
+    <AddElement
+      text="+ Add another card"
+      placeholder="Enter a title for this card..."
+      onAccept={newText => {
+        appDispatch({
+          type: 'addCard',
+          payload: {
+            title: newText,
+            listId,
+          },
+        })
+      }}
+    />
   )
 }
 

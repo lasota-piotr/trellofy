@@ -6,7 +6,7 @@ import ListenForKeys, { Keys } from './ListenForKeys'
 type GetInputProps = () => any
 type Accept = () => void
 
-interface FormAddProps {
+export interface FormAddProps {
   onAccept: (newText: string) => void
   renderText: (data: {
     getTextProps: () => {
