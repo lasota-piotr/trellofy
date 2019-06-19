@@ -1,9 +1,9 @@
 import React from 'react'
-import { useAppDispatch, useAppState } from '../context/AppContext'
-import EditableText from './reusable/EditableText'
 import { Text } from 'rebass'
 import styled from 'styled-components'
 import { ellipsis } from 'polished'
+import { useAppDispatch, useAppState } from '../context/AppContext'
+import EditableText from './reusable/EditableText'
 import { ADD_LIST_TITLE_INPUT_MAX_LENGTH } from './constants/list'
 
 interface ListTitleProps {
@@ -48,7 +48,7 @@ const ListTitle: React.FC<ListTitleProps> = ({ listId }) => {
           />
         )}
         renderText={({ text, getTextProps }) => (
-          <ListTitleText as="h3" fontSize={3} m={2} mb={3} {...getTextProps()}>
+          <ListTitleText data-testid="list-title-text" as="h3" fontSize={3} m={2} mb={3} {...getTextProps()}>
             {text}
           </ListTitleText>
         )}

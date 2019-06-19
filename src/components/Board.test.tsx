@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Board from './Board'
+import { fireEvent } from '@testing-library/react'
 import {
   Board as IBoard,
   Card as ICard,
@@ -7,7 +7,7 @@ import {
 } from '../context/appContextValue'
 import renderWithSetup from '../../__tests__/testUtils/renderWithSetup'
 import { appContextDefaultValue } from '../context/__mocks__/appContextValue'
-import { fireEvent } from '@testing-library/react'
+import Board from './Board'
 
 jest.mock('../context/appContextValue')
 
@@ -28,13 +28,28 @@ describe('Board', () => {
   })
 
   test('should add list', () => {
-    const { getByText, getByPlaceholderText } = renderWithSetup(
-      <Board boardId={boardId} />,
-    )
+    const {
+      getByText,
+      getByPlaceholderText,
+      getByTestId,
+    } = renderWithSetup(<Board boardId={boardId} />)
+
+    const formElement = getByTestId('add-list-form')
+
+    // form is invisible
+    expect(formElement).toHaveStyle('clip-path: inset(50%)')
+
     fireEvent.click(getByText(/Add another list/))
+
+    // form is visible
+    expect(formElement).not.toHaveStyle('clip-path: inset(50%)')
     const input = getByPlaceholderText(/Enter list title/) as HTMLInputElement
     const MOCK_TEXT = 'abc'
     fireEvent.change(input, { target: { value: MOCK_TEXT } })
     expect(input.value).toBe(MOCK_TEXT)
+    fireEvent.click(getByText(/Add list/))
+
+    // added new list with correct title
+    expect(getByText(MOCK_TEXT)).toHaveAttribute('data-testid', 'list-title-text')
   })
 })
