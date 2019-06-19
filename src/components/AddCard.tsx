@@ -11,6 +11,7 @@ const AddCard: React.FC<AddCardProps> = ({ listId }) => {
   return (
     <AddElement
       text="+ Add another card"
+      buttonText="Add card"
       placeholder="Enter a title for this card..."
       onAccept={newText => {
         appDispatch({

@@ -17,6 +17,7 @@ const AddList: React.FC<AddListProps> = ({ boardId, ...props }) => {
     <ListContainer padding={0} {...props}>
       <AddElement
         text="+ Add another list"
+        buttonText="Add list"
         placeholder="Enter list title..."
         maxLength={ADD_LIST_TITLE_INPUT_MAX_LENGTH}
         onAccept={newText => {
@@ -28,6 +29,7 @@ const AddList: React.FC<AddListProps> = ({ boardId, ...props }) => {
             },
           })
         }}
+        dataTestId="add-list-form"
       />
     </ListContainer>
   )

@@ -6,16 +6,20 @@ import FormAdd, { FormAddProps } from './FormAdd'
 
 interface AddElementProps {
   text: string
+  buttonText: string
   placeholder: string
   maxLength?: number
   onAccept: FormAddProps['onAccept']
+  dataTestId?: string
 }
 
 const AddElement: React.FC<AddElementProps> = ({
   onAccept,
   text,
+  buttonText,
   placeholder,
-  maxLength
+  maxLength,
+  dataTestId= 'add-element-form'
 }) => {
   return (
     <FormAdd
@@ -43,6 +47,7 @@ const AddElement: React.FC<AddElementProps> = ({
             }}
             style={inputVisible ? undefined : hideVisually()}
             ref={inputContainerRef}
+            data-testid={dataTestId}
           >
             <AddElementInput
               p={2}
@@ -58,7 +63,7 @@ const AddElement: React.FC<AddElementProps> = ({
             <AddElementButton
               as="input"
               fontSize={1}
-              value="Add list"
+              value={buttonText}
               type="submit"
             />
           </AddElementForm>
