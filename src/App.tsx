@@ -32,6 +32,8 @@ const Header = styled(Flex)`
   position: fixed;
   top: 0;
   width: 100%;
+  background-color: #fff;
+  z-index: 1;
 `
 
 export default App

@@ -23,8 +23,8 @@ const Board: React.FC<BoardProps & RouteComponentProps> = ({ boardId }) => {
     return <div>Ops can`t find this board</div>
   }
   return (
-    <BoardContainer p={3} pt={5} data-testid="view-board">
-      <BoardTitleContainer p={2}>
+    <BoardContainer p={3} pt={6} data-testid="view-board">
+      <BoardTitleContainer pt={3} pb={2} px={3}>
         <Text as="h2" m={1}>
           {board.title}
         </Text>
@@ -38,10 +38,16 @@ const Board: React.FC<BoardProps & RouteComponentProps> = ({ boardId }) => {
 const BoardTitleContainer = styled(Box)`
   position: fixed;
   top: 3rem;
+  left: 0;
+  background-color: #fff;
+  width: 100%;
+  border-bottom: 1px solid ${p => p.theme.colors.lightgray};
 `
 
 const BoardContainer = styled(Box)`
   position: relative;
+  overflow-x: auto;
+  min-height: 100vh;
 `
 
 export default Board

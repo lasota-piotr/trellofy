@@ -30,9 +30,17 @@ const body = css`
   }
 `
 
+const vendor = css`
+
+  &[data-reach-dialog-overlay] {
+    z-index: 1;
+  }
+`
+
 const Global = createGlobalStyle`
   ${html};
   ${body};
+  ${vendor};
 `
 
 export default GlobalStyles

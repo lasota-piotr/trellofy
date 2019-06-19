@@ -8,7 +8,7 @@ const Boards = () => {
   const boardsIds = appContextValue.boards.allIds
 
   return (
-    <Box px={4} data-testid="view-boards">
+    <Box px={4} py={5} data-testid="view-boards">
       <Text as="h2" m={2}>
         Boards
       </Text>
