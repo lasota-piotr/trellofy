@@ -1,5 +1,3 @@
-console.log('from real file')
-
 export interface Board {
   id: string
   title: string
